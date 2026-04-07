@@ -12,115 +12,131 @@ app = Flask(__name__)
 # CONFIG
 # ============================================================
 
-DEFAULT_SHOW_TIME = 5.0       # seconds sentence is visible
-DEFAULT_BLANK_TIME = 2.0      # seconds blank screen between sentences
+DEFAULT_SHOW_TIME = 5.0  # seconds sentence is visible
+DEFAULT_BLANK_TIME = 2.0  # seconds blank screen between sentences
 
 TEXT_COLOR = "#FFFFFF"
-BACKGROUND_COLOR = "#000000"   # black = transparent on glasses
-BLANK_COLOR = "#000000"        # keep black during blank
-FONT_SIZE = "56px"
-FONT_FAMILY = "Consolas, monospace"
-MAX_CHARS = 240
+BACKGROUND_COLOR = "#000000"  # black = transparent on glasses
+BLANK_COLOR = "#000000"  # keep black during blank
+FONT_SIZE = "30px"
+FONT_FAMILY = "Arial, Helvetica, sans-serif"
+MAX_CHARS = 500
 SERVER_HOST = "127.0.0.1"
 SERVER_PORT = 5000
 CONTENT_FILE = os.getenv("AR_CONTENT_FILE", "content.json")
 
 DEFAULT_BLOCKS = {
     1: [
-    {"data": "Block 1 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 1 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 1 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 1 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 1 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 1 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 1 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 1 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
     ],
     2: [
-    {"data": "Block 2 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 2 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 2 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 2 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 2 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 2 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 2 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 2 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
     ],
     3: [
-    {"data": "Block 3 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 3 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 3 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 3 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 3 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 3 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 3 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 3 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
     ],
     4: [
-    {"data": "Block 4 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 4 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 4 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
-    {"data": "Block 4 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 4 - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 4 - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 4 - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Block 4 - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+    ],
+    5: [
+        {"data": "Test Block - Sentence 1", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Test Block - Sentence 2", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Test Block - Sentence 3", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
+        {"data": "Test Block - Sentence 4", "show_time": DEFAULT_SHOW_TIME, "blank_time": DEFAULT_BLANK_TIME},
     ],
 }
 
+EXPECTED_BLOCK_COUNT = len(DEFAULT_BLOCKS)
+
+
 def validate_blocks(blocks):
-  if len(blocks) != 4:
-    raise ValueError(f"Exactly 4 blocks are required. There are {len(blocks)} blocks in the input.")
+    if len(blocks) != EXPECTED_BLOCK_COUNT:
+        raise ValueError(f"Exactly {EXPECTED_BLOCK_COUNT} blocks are required. There are {len(blocks)} blocks in the input.")
 
-  for b, sents in blocks.items():
-    if len(sents) != 4:
-      raise ValueError(f"Block {b} must contain exactly 4 sentences.")
+    for b, sents in blocks.items():
+        if len(sents) != 4:
+            raise ValueError(f"Block {b} must contain exactly 4 sentences.")
 
-    for i, sent in enumerate(sents, 1):
-      if not isinstance(sent, dict):
-        raise ValueError(f"Block {b}, sentence {i} must be an object.")
+        for i, sent in enumerate(sents, 1):
+            if not isinstance(sent, dict):
+                raise ValueError(f"Block {b}, sentence {i} must be an object.")
 
-      data = str(sent.get("data", ""))
-      show_time = float(sent.get("show_time", DEFAULT_SHOW_TIME))
-      blank_time = float(sent.get("blank_time", DEFAULT_BLANK_TIME))
+            data = str(sent.get("data", ""))
+            show_time = float(sent.get("show_time", DEFAULT_SHOW_TIME))
+            blank_time = float(sent.get("blank_time", DEFAULT_BLANK_TIME))
 
-      if not data.strip():
-        raise ValueError(f"Block {b}, sentence {i} data must not be empty.")
-      if len(data) > MAX_CHARS:
-        raise ValueError(f"Block {b}, sentence {i} exceeds {MAX_CHARS} chars.")
-      if show_time <= 0:
-        raise ValueError(f"Block {b}, sentence {i} show_time must be > 0.")
-      if blank_time < 0:
-        raise ValueError(f"Block {b}, sentence {i} blank_time must be >= 0.")
+            if not data.strip():
+                raise ValueError(f"Block {b}, sentence {i} data must not be empty.")
+            if len(data) > MAX_CHARS:
+                raise ValueError(f"Block {b}, sentence {i} exceeds {MAX_CHARS} chars.")
+            if show_time <= 0:
+                raise ValueError(f"Block {b}, sentence {i} show_time must be > 0.")
+            if blank_time < 0:
+                raise ValueError(f"Block {b}, sentence {i} blank_time must be >= 0.")
 
-      sent["data"] = data
-      sent["show_time"] = show_time
-      sent["blank_time"] = blank_time
+            sent["data"] = data
+            sent["show_time"] = show_time
+            sent["blank_time"] = blank_time
+
 
 def normalize_blocks(raw_blocks):
-  normalized = {}
-  for block_id in range(1, 5):
-    if str(block_id) in raw_blocks:
-      sentences = raw_blocks[str(block_id)]
-    elif block_id in raw_blocks:
-      sentences = raw_blocks[block_id]
-    else:
-      raise ValueError(f"Missing block {block_id}.")
+    normalized = {}
+    for block_id in DEFAULT_BLOCKS:
+        if str(block_id) in raw_blocks:
+            sentences = raw_blocks[str(block_id)]
+        elif block_id in raw_blocks:
+            sentences = raw_blocks[block_id]
+        else:
+            # Backfill missing blocks from defaults to keep older content files compatible.
+            sentences = DEFAULT_BLOCKS[block_id]
 
-    normalized[block_id] = []
-    for sentence in sentences:
-      if isinstance(sentence, str):
-        normalized[block_id].append({
-          "data": sentence,
-          "show_time": DEFAULT_SHOW_TIME,
-          "blank_time": DEFAULT_BLANK_TIME,
-        })
-      else:
-        normalized[block_id].append(dict(sentence))
+        normalized[block_id] = []
+        for sentence in sentences:
+            if isinstance(sentence, str):
+                normalized[block_id].append(
+                    {
+                        "data": sentence,
+                        "show_time": DEFAULT_SHOW_TIME,
+                        "blank_time": DEFAULT_BLANK_TIME,
+                    }
+                )
+            else:
+                normalized[block_id].append(dict(sentence))
 
-  validate_blocks(normalized)
-  return normalized
+    validate_blocks(normalized)
+    return normalized
+
 
 def ensure_content_file(path):
-  if os.path.exists(path):
-    return
-  with open(path, "w", encoding="utf-8") as f:
-    json.dump({"blocks": DEFAULT_BLOCKS}, f, indent=2)
+    if os.path.exists(path):
+        return
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"blocks": DEFAULT_BLOCKS}, f, indent=2)
+
 
 def load_blocks_from_file(path):
-  ensure_content_file(path)
-  with open(path, "r", encoding="utf-8") as f:
-    raw = json.load(f)
+    ensure_content_file(path)
+    with open(path, "r", encoding="utf-8") as f:
+        raw = json.load(f)
 
-  raw_blocks = raw.get("blocks", raw)
-  if not isinstance(raw_blocks, dict):
-    raise ValueError("JSON must contain an object of blocks.")
+    raw_blocks = raw.get("blocks", raw)
+    if not isinstance(raw_blocks, dict):
+        raise ValueError("JSON must contain an object of blocks.")
 
-  return normalize_blocks(raw_blocks)
+    return normalize_blocks(raw_blocks)
+
 
 BLOCKS = load_blocks_from_file(CONTENT_FILE)
 
@@ -140,8 +156,8 @@ state = {
     "selected_block": 1,
     "running": False,
     "paused": False,
-    "phase": "blank",          # "show" or "blank"
-    "sentence_index": 0,       # 0..3
+    "phase": "blank",  # "show" or "blank"
+    "sentence_index": 0,
     "current_text": "",
     "last_change": time.monotonic(),
 }
@@ -150,6 +166,7 @@ state = {
 # ENGINE
 # ============================================================
 
+
 def reset_to_blank_locked():
     state["running"] = False
     state["paused"] = False
@@ -157,6 +174,7 @@ def reset_to_blank_locked():
     state["sentence_index"] = 0
     state["current_text"] = ""
     state["last_change"] = time.monotonic()
+
 
 def start_block_locked(block_id):
     state["selected_block"] = block_id
@@ -167,17 +185,21 @@ def start_block_locked(block_id):
     state["current_text"] = BLOCKS[block_id][0]["data"]
     state["last_change"] = time.monotonic()
 
+
 def pause_locked():
     if state["running"]:
         state["paused"] = True
+
 
 def resume_locked():
     if state["running"] and state["paused"]:
         state["paused"] = False
         state["last_change"] = time.monotonic()
 
+
 def stop_locked():
     reset_to_blank_locked()
+
 
 def engine_loop():
     while True:
@@ -203,7 +225,7 @@ def engine_loop():
                 sentence = BLOCKS[block_id][state["sentence_index"]]
                 if dt >= sentence["blank_time"]:
                     next_idx = state["sentence_index"] + 1
-                    if next_idx >= 4:
+                    if next_idx >= len(BLOCKS[block_id]):
                         reset_to_blank_locked()
                     else:
                         block_id = state["selected_block"]
@@ -211,6 +233,7 @@ def engine_loop():
                         state["phase"] = "show"
                         state["current_text"] = BLOCKS[block_id][next_idx]["data"]
                         state["last_change"] = now
+
 
 threading.Thread(target=engine_loop, daemon=True).start()
 
@@ -361,10 +384,9 @@ CONTROL_HTML = """
   <div class="row">
     <label for="blockSel"><b>Select block:</b></label>
     <select id="blockSel">
-      <option value="1">Block 1</option>
-      <option value="2">Block 2</option>
-      <option value="3">Block 3</option>
-      <option value="4">Block 4</option>
+      {% for block_id in block_ids %}
+      <option value="{{ block_id }}">Block {{ block_id }}</option>
+      {% endfor %}
     </select>
   </div>
 
@@ -456,8 +478,8 @@ CONTROL_HTML = """
         "sentence_index : " + s.sentence_index + "\\n" +
         "current_text   : " + s.current_text;
 
-      for (let i = 1; i <= 4; i++) {
-        document.getElementById("block-" + i).classList.remove("active");
+      for (const blockId of {{ block_ids|tojson }}) {
+        document.getElementById("block-" + blockId).classList.remove("active");
       }
       document.getElementById("block-" + s.selected_block).classList.add("active");
     }
@@ -473,20 +495,24 @@ CONTROL_HTML = """
 # ROUTES
 # ============================================================
 
+
 @app.route("/")
 def root():
     return control()
 
+
 @app.route("/control")
 def control():
-  ip = get_local_ip()
-  display_url = f"http://{ip}:{SERVER_PORT}/display"
-  return render_template_string(
+    ip = get_local_ip()
+    display_url = f"http://{ip}:{SERVER_PORT}/display"
+    return render_template_string(
         CONTROL_HTML,
         blocks=BLOCKS,
-    display_url=display_url,
-    display_qr_url=f"https://api.qrserver.com/v1/create-qr-code/?size=720x720&data={quote_plus(display_url)}",
+        block_ids=list(BLOCKS.keys()),
+        display_url=display_url,
+        display_qr_url=f"https://api.qrserver.com/v1/create-qr-code/?size=720x720&data={quote_plus(display_url)}",
     )
+
 
 @app.route("/display")
 def display():
@@ -499,10 +525,12 @@ def display():
         font_family=FONT_FAMILY,
     )
 
+
 @app.route("/api/state")
 def api_state():
     with state_lock:
         return jsonify(dict(state))
+
 
 @app.route("/api/start", methods=["POST"])
 def api_start():
@@ -514,6 +542,7 @@ def api_start():
         start_block_locked(block_id)
     return jsonify({"ok": True})
 
+
 @app.route("/api/select_block", methods=["POST"])
 def api_select_block():
     data = request.get_json(silent=True) or {}
@@ -524,11 +553,13 @@ def api_select_block():
         state["selected_block"] = block_id
     return jsonify({"ok": True})
 
+
 @app.route("/api/pause", methods=["POST"])
 def api_pause():
     with state_lock:
         pause_locked()
     return jsonify({"ok": True})
+
 
 @app.route("/api/resume", methods=["POST"])
 def api_resume():
@@ -536,29 +567,35 @@ def api_resume():
         resume_locked()
     return jsonify({"ok": True})
 
+
 @app.route("/api/stop", methods=["POST"])
 def api_stop():
     with state_lock:
         stop_locked()
     return jsonify({"ok": True})
 
+
 @app.route("/api/config")
 def api_config():
-    return jsonify({
-    "default_show_time": DEFAULT_SHOW_TIME,
-    "default_blank_time": DEFAULT_BLANK_TIME,
-        "text_color": TEXT_COLOR,
-        "background_color": BACKGROUND_COLOR,
-        "blank_color": BLANK_COLOR,
-        "font_size": FONT_SIZE,
-        "font_family": FONT_FAMILY,
-    "content_file": CONTENT_FILE,
-        "blocks": BLOCKS,
-    })
+    return jsonify(
+        {
+            "default_show_time": DEFAULT_SHOW_TIME,
+            "default_blank_time": DEFAULT_BLANK_TIME,
+            "text_color": TEXT_COLOR,
+            "background_color": BACKGROUND_COLOR,
+            "blank_color": BLANK_COLOR,
+            "font_size": FONT_SIZE,
+            "font_family": FONT_FAMILY,
+            "content_file": CONTENT_FILE,
+            "blocks": BLOCKS,
+        }
+    )
+
 
 # ============================================================
 # UTIL
 # ============================================================
+
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -569,6 +606,7 @@ def get_local_ip():
         return "127.0.0.1"
     finally:
         s.close()
+
 
 def find_available_port(host, preferred_port):
     test_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -586,6 +624,7 @@ def find_available_port(host, preferred_port):
         return fallback_sock.getsockname()[1]
     finally:
         fallback_sock.close()
+
 
 # ============================================================
 # MAIN

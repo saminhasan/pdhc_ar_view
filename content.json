@@ -2,90 +2,112 @@
   "blocks": {
     "1": [
       {
-        "data": "Block 1 - Sentence 1",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "A Cosmetic mirror – Reflects bright light",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 1 - Sentence 2",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "0.45 Caliber Pistol (loaded gun) - Dangerous or Protective?​",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 1 - Sentence 3",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Bus at 8:30​",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 1 - Sentence 4",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "1 new message ",
+        "show_time": 15.0,
+        "blank_time": 35.0
       }
     ],
     "2": [
       {
-        "data": "Block 2 - Sentence 1",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "A topcoat restricts airflow around the body and reduces exposure to hot desert winds and sunlight. By slowing sweat evaporation, it helps conserve body moisture, reducing dehydration and maintaining body temperature​",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 2 - Sentence 2",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Pick up groceries from Costco",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 2 - Sentence 3",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Meeting is about to start in 10 minutes​",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 2 - Sentence 4",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Salt tablets raise a person’s sodium levels, making them thirstier and causing the body to use more water to maintain electrolyte balance. When water is scarce, this speeds dehydration and worsens heat stress",
+        "show_time": 15.0,
+        "blank_time": 35.0
       }
     ],
     "3": [
       {
-        "data": "Block 3 - Sentence 1",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "1 liter bottle of water – Keep yourself hydrated",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 3 - Sentence 2",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Plastic Raincoat - Useful for water collection",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 3 - Sentence 3",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Magnetic Compass – Do you want to move?",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 3 - Sentence 4",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "Lighter – Make a fire at night",
+        "show_time": 15.0,
+        "blank_time": 35.0
       }
     ],
     "4": [
       {
-        "data": "Block 4 - Sentence 1",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "A flashlight can signal rescuers at night by producing visible flashes. It also provides light after dark, helping survivors stay organized, move safely around the crash site, and coordinate tasks",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 4 - Sentence 2",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "A parachute can be spread over wreckage to provide shade, protect survivors from direct sun, reduce heat exposure, slow dehydration, and act as a large visible signal for rescuers.",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 4 - Sentence 3",
-        "show_time": 5.0,
-        "blank_time": 2.0
+        "data": "A regional map has limited value because survivors should remain at the crash site rather than attempt to travel. Search teams focus on the known crash location, so moving away from the site could reduce the chance of being found",
+        "show_time": 15.0,
+        "blank_time": 35.0
       },
       {
-        "data": "Block 4 - Sentence 4",
+        "data": "Sunscreen protects exposed skin from harmful ultraviolet radiation, reducing the risk of sunburn and skin damage in intense desert sunlight. This protection helps survivors stay outside longer with less heat stress",
+        "show_time": 15.0,
+        "blank_time": 35.0
+      }
+    ],
+    "5": [
+      {
+        "data": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "show_time": 9999999999999999999.0,
+        "blank_time": 5.0
+      },
+      {
+        "data": "Test Block - Sentence 2",
         "show_time": 5.0,
-        "blank_time": 2.0
+        "blank_time": 5.0
+      },
+      {
+        "data": "Test Block - Sentence 3",
+        "show_time": 5.0,
+        "blank_time": 5.0
+      },
+      {
+        "data": "Test Block - Sentence 4",
+        "show_time": 5.0,
+        "blank_time": 5.0
       }
     ]
   }
